@@ -1,0 +1,65 @@
+<mat-tab-group>
+  <mat-tab label="Add Item"> 
+    <div class="form">
+      <h2>Add Item: </h2>
+      <mat-form-field>
+        <mat-label>Name of Item:</mat-label>
+        <input matInput type="text" [(ngModel)]="item.itemName">
+        <button mat-button *ngIf="item.itemName" matSuffix mat-icon-button aria-label="Clear" (click)="item.itemName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Number of Sale: </mat-label>
+        <input matInput type="number" [(ngModel)]="item.numberSale" autocomplete="off">
+        <button mat-button *ngIf="item.numberSale" matSuffix mat-icon-button aria-label="Clear" (click)="item.numberSale=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field><br>
+      <button mat-raised-button color='warn' (click)= 'cancelAddItem()'> Cancel</button>
+      <button mat-raised-button color='primary' (click) = 'addItem()' style="margin-left: 3%"> Submit</button>
+    </div>
+  </mat-tab>
+  <mat-tab label="View Statistics">
+    <mat-spinner *ngIf='loading'></mat-spinner>
+    <div class="row" *ngIf='!loading'>
+      <div class="col"> 
+        <canvas baseChart
+        [chartType]="chartType1"
+        [datasets]="chartDatasets"
+        [labels]="chartLabels"
+        [colors]="chartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+      </canvas>
+      </div>
+      <div class="col">
+        <canvas baseChart
+          [chartType]="chartType2"
+          [datasets]="chartDatasets"
+          [labels]="chartLabels"
+          [colors]="chartColors"
+          [options]="chartOptions"
+          [legend]="true"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)">
+        </canvas>
+      </div>
+      <div class="col">
+        <canvas baseChart
+        [chartType]="chartType3"
+        [datasets]="chartDatasets"
+        [labels]="chartLabels"
+        [colors]="chartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+      </canvas>
+      </div>
+    </div>
+  </mat-tab>
+
+</mat-tab-group>
